@@ -19,7 +19,7 @@ const DashboardSidebar = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex h-full w-56 flex-col border-r border-border/40 bg-card dark:bg-[hsl(0,0%,16%)]">
+    <div className="flex h-full w-56 flex-col border-r border-border/40 bg-card dark:bg-background">
       {/* Top section */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2">
         <Zap className="h-5 w-5 fill-current text-foreground" />
@@ -48,8 +48,8 @@ const DashboardSidebar = () => {
             key={label}
             className={`flex items-center gap-3 rounded-lg px-2 py-2 text-sm transition-colors ${
               active
-                ? "bg-accent text-foreground"
-                : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                ? "bg-foreground text-background"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             <Icon className="h-4 w-4" />

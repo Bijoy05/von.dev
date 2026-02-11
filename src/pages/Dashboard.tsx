@@ -15,7 +15,7 @@ const Dashboard = () => {
       {/* Main content */}
       <div className="flex flex-1 flex-col">
         {/* Main chat area with rounded section */}
-        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-2xl m-2 dark:bg-[hsl(0,0%,10%)]">
+        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-2xl m-2 dark:bg-[hsl(0,0%,16%)]">
           <Particles
             className="absolute inset-0"
             quantity={140}
@@ -55,7 +55,7 @@ const Dashboard = () => {
                     key={tab}
                     className={`rounded-full px-4 py-2 text-sm transition-colors ${
                       i === 0
-                        ? "bg-accent text-foreground"
+                        ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >

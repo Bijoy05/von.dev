@@ -2,7 +2,7 @@ import { Plus, Mic, ArrowUp } from "lucide-react";
 
 const ChatInput = () => {
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-3xl">
       <div className="rounded-2xl border border-border/40 bg-card/80 shadow-2xl backdrop-blur-xl dark:bg-[hsl(0,0%,16%)]/90">
         {/* Text area */}
         <div className="px-4 pt-4 pb-2">

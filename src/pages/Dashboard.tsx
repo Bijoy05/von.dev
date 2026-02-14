@@ -4,7 +4,7 @@ import { useMode } from "@/components/ModeProvider";
 import ChatInput from "@/components/ChatInput";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 const Dashboard = () => {
   const { mode, toggleMode } = useMode();
@@ -41,30 +41,24 @@ const Dashboard = () => {
               </div>
             </LiquidGlass>
 
-            {/* Heading - coherent, only word changes */}
-            <h1 className="mb-8 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              <span>What's on your </span>
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={mode}
-                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className={`inline-block ${
-                    isDesigner 
-                      ? "bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent" 
-                      : "bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent"
-                  }`}
-                >
-                  {isDesigner ? "canvas" : "mind"}
-                </motion.span>
-              </AnimatePresence>
-              <span>?</span>
+            {/* Heading */}
+            <h1 className="mb-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              What's on your mind?
             </h1>
 
-            {/* Chat Input */}
-            <ChatInput className="w-[638px]" />
+            {/* Subtitle - same for both modes */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mb-8 max-w-lg text-lg text-white/70"
+            >
+              Use Von to ship your next idea faster!
+            </motion.p>
+
+            {/* Chat Input - fixed container to prevent movement */}
+            <div className="w-[638px] h-[121px]">
+              <ChatInput className="w-full" />
+            </div>
           </div>
 
           {/* Bottom tabs with liquid glass */}

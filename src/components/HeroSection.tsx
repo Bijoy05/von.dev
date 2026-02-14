@@ -3,12 +3,87 @@ import { LiquidGlass } from "./ui/liquid-glass";
 import { useMode } from "./ModeProvider";
 import ChatInput from "./ChatInput";
 import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+
+// Typewriter effect component
+const TypewriterWord = ({ word, isDeleting, onComplete, gradientClass }: { 
+  word: string; 
+  isDeleting: boolean; 
+  onComplete: () => void;
+  gradientClass: string;
+}) => {
+  const [displayText, setDisplayText] = useState(isDeleting ? word : "");
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    const targetText = isDeleting ? "" : word;
+    const currentLength = displayText.length;
+    const targetLength = targetText.length;
+
+    if (currentLength === targetLength) {
+      // Blink cursor a bit then call onComplete
+      const timeout = setTimeout(() => {
+        onComplete();
+      }, isDeleting ? 100 : 500);
+      return () => clearTimeout(timeout);
+    }
+
+    const timeout = setTimeout(() => {
+      if (isDeleting) {
+        setDisplayText(word.slice(0, currentLength - 1));
+      } else {
+        setDisplayText(word.slice(0, currentLength + 1));
+      }
+    }, isDeleting ? 50 : 80); // Faster delete, slower type
+
+    return () => clearTimeout(timeout);
+  }, [displayText, word, isDeleting, onComplete]);
+
+  // Cursor blink effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible(v => !v);
+    }, 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <span className={`inline-block ${gradientClass}`}>
+      {displayText}
+      <span className={`${cursorVisible ? "opacity-100" : "opacity-0"} transition-opacity`}>|</span>
+    </span>
+  );
+};
 
 const HeroSection = () => {
   const { mode, toggleMode } = useMode();
-
   const isDesigner = mode === "designer";
+  
+  const [animationState, setAnimationState] = useState<"idle" | "deleting" | "typing">("idle");
+  const [displayWord, setDisplayWord] = useState(isDesigner ? "beautiful" : "cool");
+  const previousMode = useRef(mode);
+
+  const targetWord = isDesigner ? "beautiful" : "cool";
+  const gradientClass = isDesigner 
+    ? "bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent" 
+    : "bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent";
+
+  useEffect(() => {
+    if (previousMode.current !== mode) {
+      previousMode.current = mode;
+      setAnimationState("deleting");
+    }
+  }, [mode]);
+
+  const handleDeleteComplete = () => {
+    setDisplayWord(targetWord);
+    setAnimationState("typing");
+  };
+
+  const handleTypeComplete = () => {
+    setAnimationState("idle");
+  };
 
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
@@ -33,46 +108,43 @@ const HeroSection = () => {
           </div>
         </LiquidGlass>
 
-        {/* Heading - coherent layout, only the last word changes */}
-        <h1 className="mb-4 text-5xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl">
+        {/* Heading - all in one line with typewriter effect */}
+        <h1 className="mb-4 text-5xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl whitespace-nowrap">
           <span>Create something </span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={mode}
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`inline-block ${
-                isDesigner 
-                  ? "bg-gradient-to-r from-pink-400 via-yellow-300 to-pink-400 bg-clip-text text-transparent" 
-                  : "bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent"
-              }`}
-            >
-              {isDesigner ? "beautiful" : "cool"}
-            </motion.span>
-          </AnimatePresence>
+          {animationState === "idle" && (
+            <span className={gradientClass}>{displayWord}</span>
+          )}
+          {animationState === "deleting" && (
+            <TypewriterWord 
+              word={displayWord} 
+              isDeleting={true} 
+              onComplete={handleDeleteComplete}
+              gradientClass={gradientClass}
+            />
+          )}
+          {animationState === "typing" && (
+            <TypewriterWord 
+              word={targetWord} 
+              isDeleting={false} 
+              onComplete={handleTypeComplete}
+              gradientClass={gradientClass}
+            />
+          )}
         </h1>
 
-        {/* Subtitle - position stays same */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={mode}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mb-10 max-w-lg text-lg text-white/70"
-          >
-            {isDesigner 
-              ? "Design stunning experiences with the power of AI" 
-              : "Build powerful apps and websites with AI"
-            }
-          </motion.p>
-        </AnimatePresence>
+        {/* Subtitle - same for both modes */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-10 max-w-lg text-lg text-white/70"
+        >
+          Use Von to ship your next idea faster!
+        </motion.p>
 
-        {/* ChatInput - stays in same position */}
-        <ChatInput className="w-[638px]" />
+        {/* ChatInput - fixed position container to prevent movement */}
+        <div className="w-[638px] h-[121px]">
+          <ChatInput className="w-full" />
+        </div>
       </div>
     </section>
   );

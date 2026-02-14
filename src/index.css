@@ -1,5 +1,5 @@
-/* Google Fonts imports - must be first */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&display=swap');
+/* Google Fonts - Inter Tight */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -49,11 +49,6 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
-    /* Font families */
-    --font-heading: 'Playfair Display', Georgia, serif;
-    --font-body: 'Cormorant Garamond', Georgia, serif;
-    --font-ui: system-ui, -apple-system, sans-serif;
   }
 
   .dark {
@@ -92,11 +87,6 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
-    /* Developer mode fonts */
-    --font-heading: 'JetBrains Mono', 'Fira Code', monospace;
-    --font-body: 'JetBrains Mono', 'Fira Code', monospace;
-    --font-ui: 'JetBrains Mono', 'Fira Code', monospace;
   }
 }
 
@@ -107,49 +97,11 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-body);
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
   }
 
-  /* Designer mode (light) - elegant serif fonts */
-  .mode-designer h1,
-  .mode-designer h2,
-  .mode-designer h3,
-  .mode-designer h4,
-  .mode-designer h5,
-  .mode-designer h6 {
-    font-family: var(--font-heading);
-    font-weight: 500;
-  }
-
-  .mode-designer .emphasis {
-    font-style: italic;
-    font-weight: 500;
-  }
-
-  .mode-designer body,
-  .mode-designer p,
-  .mode-designer span {
-    font-family: var(--font-body);
-    letter-spacing: 0.01em;
-  }
-
-  /* Developer mode (dark) - monospace fonts */
-  .mode-developer h1,
-  .mode-developer h2,
-  .mode-developer h3,
-  .mode-developer h4,
-  .mode-developer h5,
-  .mode-developer h6 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  .mode-developer body,
-  .mode-developer p,
-  .mode-developer span {
-    font-family: var(--font-body);
-    letter-spacing: 0;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
   }
 }
 

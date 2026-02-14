@@ -1,15 +1,11 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import DiscoverTemplates from "@/components/DiscoverTemplates";
-import DiscoverApps from "@/components/DiscoverApps";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Navbar />
       <HeroSection />
-      <DiscoverTemplates />
-      <DiscoverApps />
     </div>
   );
 };

@@ -13,9 +13,15 @@ interface LiquidGlassProps extends React.HTMLAttributes<HTMLDivElement> {
 const LiquidGlass = React.forwardRef<HTMLDivElement, LiquidGlassProps>(
   ({ children, className, intensity = "medium", ...props }, ref) => {
     const blurMap = {
-      low: "backdrop-blur-sm",
-      medium: "backdrop-blur-md",
-      high: "backdrop-blur-xl",
+      low: "backdrop-blur-lg",
+      medium: "backdrop-blur-xl",
+      high: "backdrop-blur-2xl",
+    }
+
+    const bgMap = {
+      low: "bg-white/5",
+      medium: "bg-white/8",
+      high: "bg-white/10",
     }
 
     return (
@@ -26,19 +32,19 @@ const LiquidGlass = React.forwardRef<HTMLDivElement, LiquidGlassProps>(
         transition={{ duration: 0.3, ease: "easeOut" }}
         className={cn(
           "relative overflow-hidden rounded-2xl",
-          "bg-white/10 dark:bg-black/20",
-          "border border-white/20 dark:border-white/10",
+          bgMap[intensity],
+          "border border-white/8",
           blurMap[intensity],
-          "shadow-[0_8px_32px_rgba(0,0,0,0.12)]",
-          "before:absolute before:inset-0 before:rounded-2xl",
-          "before:bg-gradient-to-br before:from-white/20 before:to-transparent",
-          "before:pointer-events-none",
+          "shadow-[0_8px_40px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)]",
           className
         )}
         {...props}
       >
-        {/* Inner glow effect */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-white/5 pointer-events-none" />
+        {/* Soft top edge highlight */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+        
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/3 via-transparent to-transparent pointer-events-none" />
         
         {/* Content */}
         <div className="relative z-10">{children}</div>

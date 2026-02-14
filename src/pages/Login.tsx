@@ -93,7 +93,7 @@ const Login = () => {
                 transition={{ duration: 0.3 }}
                 className={`inline-block ${
                   isDesigner 
-                    ? "bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-transparent" 
+                    ? "bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent" 
                     : "bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
                 }`}
               >
@@ -164,7 +164,7 @@ const Login = () => {
               type="submit"
               className={`w-full rounded-2xl px-4 py-3 text-sm font-medium text-white transition-colors ${
                 isDesigner 
-                  ? "bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600" 
+                  ? "bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" 
                   : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
               }`}
               whileHover={{ scale: 1.02 }}

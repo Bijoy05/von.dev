@@ -17,7 +17,7 @@ const Navbar = () => {
           <Zap className="h-6 w-6 fill-current text-white" />
           <span className={`text-lg font-semibold ${
             isDesigner 
-              ? "bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-transparent" 
+              ? "bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent" 
               : "bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
           }`}>
             Von

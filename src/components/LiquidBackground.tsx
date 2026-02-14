@@ -33,7 +33,7 @@ function interpolateColors(colors1: string[], colors2: string[], t: number): str
 }
 
 // Target colors for each mode
-const DESIGNER_COLORS = ["#1a237e", "#ec407a", "#ffeb3b", "#1a237e"] // Dark blue, Pink, Yellow
+const DESIGNER_COLORS = ["#1a237e", "#ec407a", "#ff9800", "#1a237e"] // Dark blue, Pink, Orange
 const DEVELOPER_COLORS = ["#000000", "#1a237e", "#7c4dff", "#000000"] // Black, Dark blue, Purple
 
 export function LiquidBackground({ className }: { className?: string }) {

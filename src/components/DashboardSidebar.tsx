@@ -34,7 +34,7 @@ const DashboardSidebar = () => {
       <div className="mx-3 mb-4 flex items-center gap-2 rounded-lg px-2 py-2 hover:bg-white/10">
         <div className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold text-white ${
           isDesigner 
-            ? "bg-gradient-to-br from-pink-500 to-yellow-500" 
+            ? "bg-gradient-to-br from-pink-500 to-orange-500" 
             : "bg-gradient-to-br from-purple-600 to-blue-600"
         }`}>
           B
